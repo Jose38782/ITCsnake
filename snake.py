@@ -63,11 +63,18 @@ def move():
         return
 
     snake.append(head)
-
+    # Ajuste para que la comida avance hacia una sola direccion
     if head == food:
         print('Snake:', len(snake))
-        food.x = randrange(-15, 15) * 10
-        food.y = randrange(-15, 15) * 10
+        direcciones = [vector(0, 10), vector(0, -10), vector(10, 0), vector(-10, 0)]
+
+        while True:
+            direccion = random.choice(direcciones)
+            nueva_pos = food + direccion
+            if inside(nueva_pos):
+                food.move(direccion)
+                break
+
     else:
         snake.pop(0)
 
